@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  web_sekolah:
+    image: nginx:latest
+    container_name: web_server_sekolah
+    ports:
+      - "8888:80" # localhost:8080
+    volumes:
+      - ./html:/usr/share/nginx/html
+    networks:
+      - jaringan_Sekolah
+    restart: unless-stopped
+    depends_on:
+      - db_sekolah
+
+  db_sekolah:
+    image: mysql:8
+    container_name: database_sekolah
+    environment:
+      MYSQL_ROOT_PASSWORD: rahasia_banget
+      MYSQL_DATABASE: db_belajar
+    volumes:
+      - penyimpanan_database:/var/lib/mysql
+    networks:
+      - jaringan_Sekolah
+    restart: unless-stopped
+
+  pma_sekolah:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma_sekolah
+    environment:
+      PMA_HOST: db_sekolah
+      MYSQL_ROOT_PASSWORD: rahasia_banget
+    ports:
+      - "8081:80" # localhost:8081
+    networks:
+      - jaringan_Sekolah
+    restart: unless-stopped
+    depends_on:
+      - db_sekolah
+
+  api_sekolah:
+    build: .
+    image: openjdk:17
+    container_name: api_spring_boot
+    ports:
+      - "8080:8080" # localhost:8080
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:mysql://db_sekolah:3306/db_belajar?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD: rahasia_banget
+    networks:
+      -  jaringan_Sekolah
+    restart: unless-stopped
+    depends_on:
+      - db_sekolah
+
+networks:
+    jaringan_Sekolah:
+        driver: bridge
+
+volumes:
+  penyimpanan_database:
+    name: hardisk_sekolah
+
+
+
+
+

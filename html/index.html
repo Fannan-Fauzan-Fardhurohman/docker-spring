@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Datang di Docker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+        }
+        h1 {
+            color: #0db7ed; /* Docker blue */
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+        .emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .info {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e1f5fe;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">🐳 🚀</div>
+        <h1>Instalasi Sukses!</h1>
+        <p>Halaman ini disajikan langsung dari dalam <b>Container Nginx</b> yang berjalan menggunakan Docker.</p>
+        <p>File ini terhubung langsung pakai teknik <i>Bind Mounts</i> ke folder laptop komputer Host.</p>
+        
+        <div class="info">
+            💻 Coba edit teks di dalam file <code>./html/index.html</code> (di laptop Anda), lalu refresh browser ini. Aksesnya otomatis berubah lho tanpa perlu restart container-nya!
+        </div>
+    </div>
+</body>
+</html>
